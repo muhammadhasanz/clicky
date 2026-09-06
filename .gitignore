@@ -11,3 +11,4 @@ windows/node_modules/
 windows/dist/
 windows/dist-electron/
 windows/package-lock.json
+windows/%SystemDrive%/
