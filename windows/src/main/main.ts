@@ -50,12 +50,11 @@ function createOverlayWindows() {
 
 function createCompanionWindow() {
   companionWindow = new BrowserWindow({
-    width: 380,
-    height: 520,
+    width: 420,
+    height: 580,
     show: true,
-    frame: false,
-    resizable: false,
-    transparent: true,
+    frame: true,
+    resizable: true,
     alwaysOnTop: true,
     skipTaskbar: false,
     webPreferences: {
@@ -64,9 +63,7 @@ function createCompanionWindow() {
     }
   });
 
-  companionWindow.on('blur', () => {
-    companionWindow?.hide();
-  });
+  companionWindow.center();
 
   if (process.env.VITE_DEV_SERVER_URL) {
     companionWindow.loadURL(`${process.env.VITE_DEV_SERVER_URL}index.html`);
