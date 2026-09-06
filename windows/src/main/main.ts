@@ -52,12 +52,12 @@ function createCompanionWindow() {
   companionWindow = new BrowserWindow({
     width: 380,
     height: 520,
-    show: false,
+    show: true,
     frame: false,
     resizable: false,
     transparent: true,
     alwaysOnTop: true,
-    skipTaskbar: true,
+    skipTaskbar: false,
     webPreferences: {
       preload: path.join(__dirname, 'index.cjs'),
       sandbox: false,
