@@ -11,6 +11,7 @@ function createOverlayWindows() {
   for (const display of displays) {
     if (overlayWindows.has(display.id)) continue;
 
+    const preloadPath = path.join(__dirname, 'index.mjs');
     const overlay = new BrowserWindow({
       x: display.bounds.x,
       y: display.bounds.y,
@@ -24,7 +25,7 @@ function createOverlayWindows() {
       resizable: false,
       focusable: false,
       webPreferences: {
-        preload: path.join(__dirname, '../preload/index.js'),
+        preload: preloadPath,
         sandbox: false,
       }
     });
@@ -36,7 +37,7 @@ function createOverlayWindows() {
     if (process.env.VITE_DEV_SERVER_URL) {
       overlay.loadURL(`${process.env.VITE_DEV_SERVER_URL}overlay.html?displayId=${display.id}`);
     } else {
-      overlay.loadFile(path.join(__dirname, '../renderer/overlay.html'), { query: { displayId: String(display.id) } });
+      overlay.loadFile(path.join(__dirname, '../dist/overlay.html'), { query: { displayId: String(display.id) } });
     }
 
     overlayWindows.set(display.id, overlay);
@@ -54,7 +55,7 @@ function createCompanionWindow() {
     alwaysOnTop: true,
     skipTaskbar: true,
     webPreferences: {
-      preload: path.join(__dirname, '../preload/index.js'),
+      preload: path.join(__dirname, 'index.mjs'),
       sandbox: false,
     }
   });
@@ -66,7 +67,7 @@ function createCompanionWindow() {
   if (process.env.VITE_DEV_SERVER_URL) {
     companionWindow.loadURL(`${process.env.VITE_DEV_SERVER_URL}index.html`);
   } else {
-    companionWindow.loadFile(path.join(__dirname, '../renderer/index.html'));
+    companionWindow.loadFile(path.join(__dirname, '../dist/index.html'));
   }
 }
 
