@@ -1,5 +1,9 @@
 import { app, BrowserWindow, Tray, Menu, nativeImage, screen, ipcMain, desktopCapturer, globalShortcut } from 'electron';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 let tray: Tray | null = null;
 let companionWindow: BrowserWindow | null = null;
@@ -11,7 +15,7 @@ function createOverlayWindows() {
   for (const display of displays) {
     if (overlayWindows.has(display.id)) continue;
 
-    const preloadPath = path.join(__dirname, 'index.mjs');
+    const preloadPath = path.join(__dirname, 'index.cjs');
     const overlay = new BrowserWindow({
       x: display.bounds.x,
       y: display.bounds.y,
@@ -55,7 +59,7 @@ function createCompanionWindow() {
     alwaysOnTop: true,
     skipTaskbar: true,
     webPreferences: {
-      preload: path.join(__dirname, 'index.mjs'),
+      preload: path.join(__dirname, 'index.cjs'),
       sandbox: false,
     }
   });
