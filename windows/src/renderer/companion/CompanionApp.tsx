@@ -51,7 +51,7 @@ export const CompanionApp: React.FC = () => {
       });
 
       await recorder.startRecording((pcm16) => {
-        assemblyClient.sendAudioChunk(pcm16.buffer);
+        assemblyClient.sendAudioChunk(pcm16);
       });
     } catch (err) {
       console.error('Failed to start recording:', err);
